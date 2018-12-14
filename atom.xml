@@ -6,10 +6,33 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://striver.com.cn/"/>
-  <updated>2018-12-14T07:27:26.188Z</updated>
+  <updated>2018-12-14T07:38:18.762Z</updated>
   <id>http://striver.com.cn/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>golang中下划线的意义</title>
+    <link href="http://striver.com.cn/2018/12/14/golang%E4%B8%AD%E4%B8%8B%E5%88%92%E7%BA%BF%E7%9A%84%E6%84%8F%E4%B9%89/"/>
+    <id>http://striver.com.cn/2018/12/14/golang中下划线的意义/</id>
+    <published>2018-12-14T07:37:31.000Z</published>
+    <updated>2018-12-14T07:38:18.762Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="用在import"><a href="#用在import" class="headerlink" title="用在import"></a>用在import</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  _  <span class="string">"net/http/pprof"</span></span><br></pre></td></tr></table></figure><p>引入包时，会先调用包中的初始化函数，这种使用方式仅让导入的包做初始化，而不使用包中其他功能</p><h2 id="用在返回值"><a href="#用在返回值" class="headerlink" title="用在返回值"></a>用在返回值</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> _,v := <span class="keyword">range</span> Slice&#123;&#125;</span><br><span class="line"></span><br><span class="line">_,err := <span class="function"><span class="keyword">func</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure><p>表示忽略某个值。单函数有多个返回值，用来获取某个特定的值</p><h2 id="用在变量"><a href="#用在变量" class="headerlink" title="用在变量"></a>用在变量</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> T <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> _ X = T&#123;&#125;</span><br><span class="line"><span class="comment">//其中 I为interface</span></span><br></pre></td></tr></table></figure><p>上面用来判断 type T是否实现了X,用作类型断言，如果T没有实现接口X，则编译错误.</p><h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>下面代码的作用是保证结构体==HelloServiceClient==实现了接口==HelloServiceInterface==<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _ HelloServiceInterface = (*HelloServiceClient)(<span class="literal">nil</span>)</span><br></pre></td></tr></table></figure></p><p>下面代码声明的==HelloServiceInterface==既是变量又是类型<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> HelloServiceInterface = <span class="keyword">interface</span> &#123;</span><br><span class="line">Hello(request <span class="keyword">string</span>, reply *<span class="keyword">string</span>) error</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;用在import&quot;&gt;&lt;a href=&quot;#用在import&quot; class=&quot;headerlink&quot; title=&quot;用在import&quot;&gt;&lt;/a&gt;用在import&lt;/h2&gt;&lt;figure class=&quot;highlight golang&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td c
+      
+    
+    </summary>
+    
+    
+      <category term="golang" scheme="http://striver.com.cn/tags/golang/"/>
+    
+  </entry>
   
   <entry>
     <title>http协议整理</title>
