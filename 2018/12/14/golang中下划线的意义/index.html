@@ -122,18 +122,18 @@
 
 
 
-<meta name="description" content="用在import1import  _  &quot;net/http/pprof&quot; 引入包时，会先调用包中的初始化函数，这种使用方式仅让导入的包做初始化，而不使用包中其他功能 用在返回值123for _,v := range Slice&amp;#123;&amp;#125;_,err := func() 表示忽略某个值。单函数有多个返回值，用来获取某个特定的值 用在变量123type T struct&amp;#123;&amp;#1">
+<meta name="description" content="用在import1import  _  &quot;net/http/pprof&quot; 引入包时，会先调用包中的初始化函数，这种使用方式仅让导入的包做初始化，而不使用包中其他功能">
 <meta name="keywords" content="golang">
 <meta property="og:type" content="article">
 <meta property="og:title" content="golang中下划线的意义">
 <meta property="og:url" content="http://striver.com.cn/2018/12/14/golang中下划线的意义/index.html">
 <meta property="og:site_name" content="Sunvin&#39;s blog">
-<meta property="og:description" content="用在import1import  _  &quot;net/http/pprof&quot; 引入包时，会先调用包中的初始化函数，这种使用方式仅让导入的包做初始化，而不使用包中其他功能 用在返回值123for _,v := range Slice&amp;#123;&amp;#125;_,err := func() 表示忽略某个值。单函数有多个返回值，用来获取某个特定的值 用在变量123type T struct&amp;#123;&amp;#1">
+<meta property="og:description" content="用在import1import  _  &quot;net/http/pprof&quot; 引入包时，会先调用包中的初始化函数，这种使用方式仅让导入的包做初始化，而不使用包中其他功能">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-14T07:40:56.568Z">
+<meta property="og:updated_time" content="2018-12-14T12:13:18.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="golang中下划线的意义">
-<meta name="twitter:description" content="用在import1import  _  &quot;net/http/pprof&quot; 引入包时，会先调用包中的初始化函数，这种使用方式仅让导入的包做初始化，而不使用包中其他功能 用在返回值123for _,v := range Slice&amp;#123;&amp;#125;_,err := func() 表示忽略某个值。单函数有多个返回值，用来获取某个特定的值 用在变量123type T struct&amp;#123;&amp;#1">
+<meta name="twitter:description" content="用在import1import  _  &quot;net/http/pprof&quot; 引入包时，会先调用包中的初始化函数，这种使用方式仅让导入的包做初始化，而不使用包中其他功能">
 
 
 
@@ -366,9 +366,8 @@
       
 
       
-        <a id="more"></a>
-<h2 id="用在import"><a href="#用在import" class="headerlink" title="用在import"></a>用在import</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  _  <span class="string">"net/http/pprof"</span></span><br></pre></td></tr></table></figure>
-<p>引入包时，会先调用包中的初始化函数，这种使用方式仅让导入的包做初始化，而不使用包中其他功能</p>
+        <h2 id="用在import"><a href="#用在import" class="headerlink" title="用在import"></a>用在import</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  _  <span class="string">"net/http/pprof"</span></span><br></pre></td></tr></table></figure>
+<p>引入包时，会先调用包中的初始化函数，这种使用方式仅让导入的包做初始化，而不使用包中其他功能<br><a id="more"></a></p>
 <h2 id="用在返回值"><a href="#用在返回值" class="headerlink" title="用在返回值"></a>用在返回值</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> _,v := <span class="keyword">range</span> Slice&#123;&#125;</span><br><span class="line"></span><br><span class="line">_,err := <span class="function"><span class="keyword">func</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <p>表示忽略某个值。单函数有多个返回值，用来获取某个特定的值</p>
 <h2 id="用在变量"><a href="#用在变量" class="headerlink" title="用在变量"></a>用在变量</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> T <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> _ X = T&#123;&#125;</span><br><span class="line"><span class="comment">//其中 I为interface</span></span><br></pre></td></tr></table></figure>
