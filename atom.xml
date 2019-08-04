@@ -37,7 +37,7 @@
     <link href="http://striver.com.cn/2018/09/07/http/"/>
     <id>http://striver.com.cn/2018/09/07/http/</id>
     <published>2018-09-07T06:39:12.000Z</published>
-    <updated>2018-12-14T07:27:26.188Z</updated>
+    <updated>2019-08-04T06:52:14.608Z</updated>
     
     <content type="html"><![CDATA[<p>HTTP(Hyper Text Transfer Protocal)超文本传输协议。主要是用来在客户端和服务器之间传递数据（包括但不限于文本、图片、音频）的协议。它基于TCP/IP通信协议来传递数据，也就是说http的传输需要先建立tcp连接。那么为什么不用TCP直接传输数据还要在封装一层呢？我想这就是http属于应用层协议的原因吧，tcp协议属于传输层协议，使用tcp需要声明socket，绑定端口，监听端口…等复杂操作，而作为应用层，我们应该关注的更多的是数据有没有到达和返回，所以没有必要在底层的协议上浪费时间。<br><a id="more"></a></p><h1 id="http结构"><a href="#http结构" class="headerlink" title="http结构"></a>http结构</h1><p>http协议分为请求和响应。</p><h2 id="http请求和响应结构"><a href="#http请求和响应结构" class="headerlink" title="http请求和响应结构"></a>http请求和响应结构</h2><p>我们可以把http请求和响应分别看做4个部分：<br><br>http请求：请求行，请求头，空行和请求数据。<br><br>http响应：状态行、响应头、空行和响应数据。<br><br>其中空行用于分割http头部和传输数据；请求数据和响应数据依托具体业务，本文不展开讨论。</p><h3 id="请求行："><a href="#请求行：" class="headerlink" title="请求行："></a>请求行：</h3><p>形如<code>GET /index.html HTTP/1.1</code><br>分别对应请求方法，请求内容和http版本。</p><h4 id="http版本"><a href="#http版本" class="headerlink" title="http版本"></a>http版本</h4><h5 id="HTTP-0-9"><a href="#HTTP-0-9" class="headerlink" title="HTTP/0.9"></a>HTTP/0.9</h5><p>这是HTTP最早大规模使用的版，现已过时。在这个版本中 只有GET一种请求方法，在HTTP通讯也没有指定版本号，也不支持请求头信息。该版本不支持POST等方法，因此客户端向服务器传递信息的能力非常有限。HTTP/0.9的请求只有如下一行：<br><code>GET www.baidu.com</code></p><h5 id="HTTP-1-0"><a href="#HTTP-1-0" class="headerlink" title="HTTP/1.0"></a>HTTP/1.0</h5><p>这个版本是第一个在HTTP通讯中指定版本号的协议版本，HTTP/1.0至今仍被广泛采用，特别是在代理服务器中。<br>HTTP/1.0支持：GET、POST、HEAD三种HTTP请求方法。</p><h5 id="HTTP-1-1"><a href="#HTTP-1-1" class="headerlink" title="HTTP/1.1"></a>HTTP/1.1</h5><p>HTTP/1.1是当前正在使用的版本。该版本默认采用持久连接，并能很好地配合代理服务器工作。还支持以管道方式同时发送多个请求，以便降低线路负载，提高传输速度。<br>HTTP/1.1新增了：OPTIONS、PUT、DELETE、TRACE、CONNECT五种HTTP请求方法。</p><h5 id="HTTP-2"><a href="#HTTP-2" class="headerlink" title="HTTP/2"></a>HTTP/2</h5><p>这个版本是最新发布的版本，于2015年5月做HTTP标准正式发布。http/2在请求方法上未做改变，在数据传输上增加了二进制分帧、多路复用、服务器推送、头部压缩等一系列特性。</p><h4 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h4><p>按照RESTful规范，各请求方法使用如下：<br><br>GET（SELECT）：从服务器取出资源（一项或多项）。<br><br>POST（CREATE）：在服务器新建一个资源。<br><br>PUT（UPDATE）：在服务器更新资源（客户端提供改变后的完整资源）。<br><br>PATCH（UPDATE）：在服务器更新资源（客户端提供改变的属性）。<br><br>DELETE（DELETE）：从服务器删除资源。<br></p><h3 id="状态行"><a href="#状态行" class="headerlink" title="状态行"></a>状态行</h3><p>形如<code>http/1.1 200 ok</code><br>分别对应http版本及状态码。常见的状态码：<br><br>200 - 请求成功<br><br>301 - 资源（网页等）被永久转移到其它URL<br><br>404 - 请求的资源（网页等）不存在<br><br>500 - 内部服务器错误<br><br><a href="http://www.runoob.com/http/http-status-codes.html" target="_blank" rel="noopener">详细状态码</a>。</p><h3 id="请求头部"><a href="#请求头部" class="headerlink" title="请求头部"></a>请求头部</h3><p>包含但不限于以下各项：<br><br>Accept：声明客户端可以接收什么类型的数据，内容参见<a href="http://en.wikipedia.org/wiki/MIME_type" target="_blank" rel="noopener">MIME</a><br><br>Cookie:用于标记服务器端session。<br><br>Referer：引用，标记这条请求是从何处跳转过来的。<br><br>Cache-Control：标记是否接收缓存数据。<br></p><h3 id="响应头部"><a href="#响应头部" class="headerlink" title="响应头部"></a>响应头部</h3><p>具体可参见<a href="http://www.runoob.com/http/http-header-fields.html" target="_blank" rel="noopener">HTTP 响应头信息</a><br>空行和响应数据参考请求部分。</p><p>很多博客上说http是无连接、无状态的协议，这又是什么意思呢？无连接这个说法不太严谨，它是说http协议每次连接只处理一个请求，请求处理结束，连接断开。针对这个问题，http1.0请求头部已经增加了Connection:Keep-Alive用于声明这条连接处理完请求之后继续保持，当然在http1.1的时候官方修改为Keep-Alive:true or Keep-Alive:false，用于表示是否保持连接。无状态的意思是说http协议无论是否保持这条连接，其处理的请求是不记录上下文状态的，换句话就是说：你忙你的，我忙我的，相互之间没关系。</p>]]></content>
     
@@ -69,26 +69,6 @@
     
     
       <category term="microservice" scheme="http://striver.com.cn/tags/microservice/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql数据库（一）</title>
-    <link href="http://striver.com.cn/2018/06/25/RDBMS_1/"/>
-    <id>http://striver.com.cn/2018/06/25/RDBMS_1/</id>
-    <published>2018-06-24T18:06:32.000Z</published>
-    <updated>2018-09-01T10:28:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>mysql（RDBMS,relational database management system）关系型数据库管理系统。<br><a id="more"></a></p><h3 id="四大基本操作：-CURD-（Create、Retrieve、Update、Delete）"><a href="#四大基本操作：-CURD-（Create、Retrieve、Update、Delete）" class="headerlink" title="四大基本操作： CURD （Create、Retrieve、Update、Delete）"></a>四大基本操作： CURD （Create、Retrieve、Update、Delete）</h3><p> 创建、检索、更新、删除，习惯上我们叫增、删、改、查。</p><h4 id="一、创建"><a href="#一、创建" class="headerlink" title="一、创建"></a>一、创建</h4><h5 id="库操作："><a href="#库操作：" class="headerlink" title="库操作："></a>库操作：</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> 数据库名；</span><br></pre></td></tr></table></figure><p>例如：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> DB;</span><br></pre></td></tr></table></figure><h5 id="表操作："><a href="#表操作：" class="headerlink" title="表操作："></a>表操作：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table 表名（</span><br><span class="line">字段名1 数据类型,</span><br><span class="line">字段名2 数据类型</span><br><span class="line">...</span><br><span class="line">）[存储引擎][字符集]；</span><br></pre></td></tr></table></figure><p>例如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table test（</span><br><span class="line">ID int,</span><br><span class="line">name varchar(15)</span><br><span class="line">...</span><br><span class="line">）;</span><br></pre></td></tr></table></figure><h5 id="数据操作："><a href="#数据操作：" class="headerlink" title="数据操作："></a>数据操作：</h5>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;mysql（RDBMS,relational database management system）关系型数据库管理系统。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="数据库" scheme="http://striver.com.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
